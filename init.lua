@@ -226,13 +226,45 @@ require('lazy').setup({
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
-      options = {
-        icons_enabled = false,
-        theme = 'onedark',
-        component_separators = '|',
-        section_separators = '',
-      },
-    },
+          options = {
+            icons_enabled = true,
+            theme = 'auto',
+            component_separators = { left = '', right = ''},
+            section_separators = { left = '', right = ''},
+            disabled_filetypes = {
+              statusline = {},
+              winbar = {},
+            },
+            ignore_focus = {},
+            always_divide_middle = true,
+            globalstatus = false,
+            refresh = {
+              statusline = 1000,
+              tabline = 1000,
+              winbar = 1000,
+            }
+          },
+          sections = {
+            lualine_a = {'mode'},
+            lualine_b = {'branch', 'diff', 'diagnostics'},
+            lualine_c = {'filename'},
+            lualine_x = {'encoding', 'fileformat', 'filetype'},
+            lualine_y = {'progress'},
+            lualine_z = {'location'}
+          },
+          inactive_sections = {
+            lualine_a = {},
+            lualine_b = {},
+            lualine_c = {'filename'},
+            lualine_x = {'location'},
+            lualine_y = {},
+            lualine_z = {}
+          },
+          tabline = {},
+          winbar = {},
+          inactive_winbar = {},
+          extensions = {}
+        },
   },
 
   {
@@ -449,10 +481,29 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
-
+    ensure_installed = {
+      "markdown",
+      "markdown_inline",
+      "tsx",
+      "typescript",
+      "javascript",
+      "toml",
+      "json",
+      "yaml",
+      "css",
+      "html",
+      "lua",
+      "rust",
+      "go",
+      "vimdoc",
+      "vim",
+      "bash",
+      -- "python",
+      -- "haskell",
+      -- "ocaml",
+    },
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-    auto_install = false,
+    auto_install = true,
     -- Install languages synchronously (only applied to `ensure_installed`)
     sync_install = false,
     -- List of parsers to ignore installing
