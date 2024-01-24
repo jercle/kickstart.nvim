@@ -500,6 +500,7 @@ vim.defer_fn(function()
       "yaml",
       "css",
       "html",
+      "http",
       "lua",
       "rust",
       "go",
