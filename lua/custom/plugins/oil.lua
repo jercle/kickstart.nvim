@@ -5,6 +5,9 @@
 --   dependencies = { "nvim-tree/nvim-web-devicons" },
 --   config = function()
 --     require("oil").setup({
+--       keymaps = {
+--         [""]
+--       }
 --       columns = {
 --         "icon",
 --         "permissions",

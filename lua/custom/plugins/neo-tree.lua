@@ -9,8 +9,13 @@ return {
   },
   config = function()
     require("neo-tree").setup {
+      sources = {
+        "filesystem",
+        "buffers",
+        "git_status",
+        "document_symbols"
+    },
       window = {
-
         mappings = {
           ["P"] = { "toggle_preview", config = { use_float = true, } },
           ["a"] = {
@@ -46,7 +51,7 @@ return {
       source_selector = {
         winbar = true,
         -- statusline = true
-      }
+      },
     }
   end,
 }
