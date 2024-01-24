@@ -47,6 +47,14 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 vim.opt.titlestring = [[%f %h%m%r%w %{v:progname} (%{tabpagenr()} of %{tabpagenr('$')})]]
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.bo.softtabstop = 2
+-- vim.wo.number = true
+-- vim.wo.relativenumber = true
+
+
 -- function _G.current_tab()
 --   local curr_buf = vim.fn.bufnr()
 --   local total = 0
@@ -332,7 +340,7 @@ require('lazy').setup({
 vim.o.hlsearch = false
 
 -- Make line numbers default
-vim.wo.number = false
+vim.wo.number = true
 
 -- Make line numbers relative
 vim.wo.relativenumber = true

@@ -27,3 +27,20 @@
 --   on_attach = nvim_tree_mappings,
 --   ---
 -- }
+
+local km = vim.keymap.set
+
+return {
+  -- km('n', '<C-t>', )
+    -- km('n', '<leader>1', '<Cmd>Neotree source=filesystem focus<CR>'),
+    km('n', '<leader>1', '<Cmd>Neotree toggle<CR>'),
+
+
+    -- km('n', '<leader>`', require('winshift.lib').window_picker(), {noremap=true}),
+
+    km("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {noremap=true}),
+    km("n", "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", {noremap=true}),
+    km("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", {noremap=true}),
+    km("n", "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", {noremap=true}),
+    km("n", "gpc", "<cmd>lua require('goto-preview').close_all_win()<CR>", {noremap=true})
+}
