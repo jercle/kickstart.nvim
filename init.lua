@@ -775,26 +775,78 @@ end
 
 vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
     { desc = "Open harpoon window" })
-vim.keymap.set("n", "<leader>f", function() harpoon:list():append() end)
-vim.keymap.set("n", "<leader>x", function() harpoon:list():remove() end)
-vim.keymap.set("n", "<leader>q", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<leader>f", function() harpoon:list():append() end, {desc = "Harpoon: Append to list"})
+vim.keymap.set("n", "<leader>x", function() harpoon:list():remove() end, {desc = "Harpoon: Remove from list"})
+vim.keymap.set("n", "<leader>q", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, {desc = "Harpoon: Toggle quick list"})
 
-vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
-vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end)
-vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end)
-vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end)
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end, {desc = "Harpoon: Select 1"})
+vim.keymap.set("n", "<C-t>", function() harpoon:list():select(2) end, {desc = "Harpoon: Select 2"})
+vim.keymap.set("n", "<C-n>", function() harpoon:list():select(3) end, {desc = "Harpoon: Select 3"})
+vim.keymap.set("n", "<C-s>", function() harpoon:list():select(4) end, {desc = "Harpoon: Select 4"})
 
 -- Toggle previous & next buffers stored within Harpoon list
-vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
-vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
-vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end, {desc = "Harpoon: Previous"})
+vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end, {desc = "Harpoon: Next"})
 ----------- HARPOON -----------
 
 
 require('mappings')
+require('telescope').load_extension('projects')
+
+local theme = {
+  fill = 'TabLineFill',
+  -- Also you can do this: fill = { fg='#f2e9de', bg='#907aa9', style='italic' }
+  head = 'TabLine',
+  current_tab = 'TabLineSel',
+  tab = 'TabLine',
+  win = 'TabLine',
+  tail = 'TabLine',
+}
+require('tabby.tabline').set(function(line)
+  return {
+    {
+      { '  ', hl = theme.head },
+      line.sep('', theme.head, theme.fill),
+    },
+    line.tabs().foreach(function(tab)
+      local hl = tab.is_current() and theme.current_tab or theme.tab
+      return {
+        line.sep('', hl, theme.fill),
+        tab.is_current() and '' or '󰆣',
+        tab.number(),
+        tab.name(),
+        tab.close_btn(''),
+        line.sep('', hl, theme.fill),
+        hl = hl,
+        margin = ' ',
+      }
+    end),
+    line.spacer(),
+    line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+      return {
+        line.sep('', theme.win, theme.fill),
+        win.is_current() and '' or '',
+        win.buf_name(),
+        line.sep('', theme.win, theme.fill),
+        hl = theme.win,
+        margin = ' ',
+      }
+    end),
+    {
+      line.sep('', theme.tail, theme.fill),
+      { '  ', hl = theme.tail },
+    },
+    hl = theme.fill,
+  }
+end)
 
 
 
+vim.keymap.set("n", "<leader>tr", function()
+  -- require('tabby.feature.tab_name').set(0, vim.fn.substitute(vim.fn.getcwd(), '^.*/', '', '') )
+  require('tabby.feature.tab_name').set(0, vim.fn.fnamemodify(vim.fn.getcwd(), ':t') )
+end
+, { noremap = true })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

@@ -33,14 +33,23 @@ local km = vim.keymap.set
 return {
   -- km('n', '<C-t>', )
     -- km('n', '<leader>1', '<Cmd>Neotree source=filesystem focus<CR>'),
-    km('n', '<leader>1', '<Cmd>Neotree toggle<CR>'),
-
-
+    km('n', '<leader>1', '<Cmd>Neotree toggle<CR>', {desc = "Toggle Neotree"}),
     -- km('n', '<leader>`', require('winshift.lib').window_picker(), {noremap=true}),
-
     km("n", "gpd", "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", {noremap=true}),
     km("n", "gpt", "<cmd>lua require('goto-preview').goto_preview_type_definition()<CR>", {noremap=true}),
     km("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", {noremap=true}),
     km("n", "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", {noremap=true}),
-    km("n", "gpc", "<cmd>lua require('goto-preview').close_all_win()<CR>", {noremap=true})
+    km("n", "gpc", "<cmd>lua require('goto-preview').close_all_win()<CR>", {noremap=true}),
+    km("n", "<leader>ta", ":$tabnew<CR>", { noremap = true }, {desc = "Tabby: New tab"}),
+    km("n", "<leader>tc", ":tabclose<CR>", { noremap = true }),
+    km("n", "<leader>to", ":tabonly<CR>", { noremap = true }),
+    -- km("n", "<leader>tn", ":tabn<CR>", { noremap = true }),
+    -- km("n", "<leader>tp", ":tabp<CR>", { noremap = true }),
+    -- move current tab to previous position
+    km("n", "<leader>tmp", ":-tabmove<CR>", { noremap = true }),
+    -- move current tab to next position
+    km("n", "<leader>tmn", ":+tabmove<CR>", { noremap = true }),
+
+
+
 }
