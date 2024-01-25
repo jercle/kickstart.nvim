@@ -13,7 +13,7 @@ return {
         "filesystem",
         "buffers",
         "git_status",
-        "document_symbols"
+        -- "document_symbols"
     },
       window = {
         mappings = {
@@ -48,10 +48,10 @@ return {
             files = { ".dockerignore", "docker-compose.*", "dockerfile*" },
         }
       },
-      source_selector = {
-        winbar = true,
-        -- statusline = true
-      },
+      -- source_selector = {
+      --   winbar = true,
+      --   -- statusline = true
+      -- },
     }
   end,
 }
