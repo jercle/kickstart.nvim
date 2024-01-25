@@ -6,6 +6,7 @@ return {
     require("bufferline").setup({
       options = {
         mode = "tabs",
+        separator_style = "slope"
     --     name_formatter = function(buf)  -- buf contains:
     --       local repo = vim.fn.system("basename `git rev-parse --show-toplevel`")
     --       return repo
