@@ -51,6 +51,20 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.bo.softtabstop = 2
+vim.g.clipboard = {
+ name = 'WslClipboard',
+ copy = {
+ ["+"] = 'clip.exe',
+ ["*"] = 'clip.exe',
+ },
+ paste = {
+ ["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+ ["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+},
+ cache_enabled = 0,
+ }
+
+
 -- vim.wo.number = true
 -- vim.wo.relativenumber = true
 
@@ -456,9 +470,14 @@ end
 
 vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
 
+
+local function telescope_buffers_cwd_only()
+  require('telescope.builtin').buffers({only_cwd = true})
+end
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader><space>', telescope_buffers_cwd_only, { desc = '[ ] Find existing buffers in cwd' })
+vim.keymap.set('n', '<leader>sa', require('telescope.builtin').buffers, { desc = 'Find from [A]ll existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
@@ -792,6 +811,7 @@ vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end, {desc = "Ha
 
 require('mappings')
 require('telescope').load_extension('projects')
+require("telescope").load_extension("scope")
 
 local theme = {
   fill = 'TabLineFill',

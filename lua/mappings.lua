@@ -40,6 +40,8 @@ return {
     km("n", "gpi", "<cmd>lua require('goto-preview').goto_preview_implementation()<CR>", {noremap=true}),
     km("n", "gpD", "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", {noremap=true}),
     km("n", "gpc", "<cmd>lua require('goto-preview').close_all_win()<CR>", {noremap=true}),
+
+-- Tabby
     km("n", "<leader>ta", ":$tabnew<CR>", { noremap = true }, {desc = "Tabby: New tab"}),
     km("n", "<leader>tc", ":tabclose<CR>", { noremap = true }),
     km("n", "<leader>to", ":tabonly<CR>", { noremap = true }),
@@ -50,6 +52,11 @@ return {
     -- move current tab to next position
     km("n", "<leader>tmn", ":+tabmove<CR>", { noremap = true }),
 
+-- Cloak
+    km("n", "<leader>ct", ":CloakToggle<CR>", { noremap = true, desc = "Cloak: Toggle cloaking"}),
+
+-- ToggleTerm
+    km("n", "<C-t>", ":ToggleTerm<CR>", { noremap = true, desc = "ToggleTerm: Toggle Terminal"})
 
 
 }
